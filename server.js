@@ -29,7 +29,7 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-
+app.use('/', indexRouter); // Use the indexRouter for all routes
 
 // Start the server
 const PORT = process.env.PORT || 8080;
