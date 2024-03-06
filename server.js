@@ -31,6 +31,7 @@ app.get('/', (req, res) => {
 
 app.use('/', indexRouter); // Use the indexRouter for all routes
 
+
 // Start the server
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
