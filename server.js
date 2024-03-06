@@ -11,6 +11,14 @@ app
   .use(express.urlencoded({ extended: true }))
   .use('/', require('./routes'));
 
+// Define models
+const db = require('./models');
+db.mongoose
+  .connect(db.url, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+
 // Set up middleware
 app.use(bodyParser.json());
 
