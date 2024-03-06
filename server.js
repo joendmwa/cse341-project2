@@ -2,6 +2,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors'); // Import CORS module
+const indexRouter = require('./routes/index'); // Relative path to index.js file
+
 
 // Create an instance of Express
 const app = express();
@@ -26,6 +28,8 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
+
+app.use('/', indexRouter); // Use the indexRouter for all routes
 
 // Start the server
 const PORT = process.env.PORT || 8080;
