@@ -1,9 +1,15 @@
 // Import necessary modules
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors'); // Import CORS module
 
 // Create an instance of Express
 const app = express();
+app
+  .use(cors())
+  .use(express.json())
+  .use(express.urlencoded({ extended: true }))
+  .use('/', require('./routes'));
 
 // Set up middleware
 app.use(bodyParser.json());
