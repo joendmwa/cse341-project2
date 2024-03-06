@@ -7,11 +7,6 @@ const indexRouter = require('./routes/index'); // Relative path to index.js file
 
 // Create an instance of Express
 const app = express();
-app
-  .use(cors())
-  .use(express.json())
-  .use(express.urlencoded({ extended: true }))
-  .use('/', require('./routes'));
 
 // Define models
 const db = require('./models');
@@ -29,7 +24,7 @@ app.get('/', (req, res) => {
   res.send('Hello, World!');
 });
 
-app.use('/', indexRouter); // Use the indexRouter for all routes
+
 
 // Start the server
 const PORT = process.env.PORT || 8080;
