@@ -1,35 +1,34 @@
 // Import necessary modules
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors'); // Import CORS module
-const indexRouter = require('./routes/index'); // Relative path to index.js file
-
+const cors = require('cors');
+const indexRouter = require('./routes/index');
+const db = require('./models'); // Import models
 
 // Create an instance of Express
 const app = express();
+
+// Middleware setup
 app
   .use(cors())
   .use(express.json())
-  .use(express.urlencoded({ extended: true }))
-  .use('/', require('./routes'));
+  .use(express.urlencoded({ extended: true }));
 
-// Define models
-const db = require('./models');
-db.mongoose
-  .connect(db.url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-
-// Set up middleware
-app.use(bodyParser.json());
-
-// Define routes
-app.get('/', (req, res) => {
-  res.send('Hello, World!');
+// Database connection
+db.mongoose.connect(db.url, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('Connected to the database!');
+})
+.catch((err) => {
+  console.log('Cannot connect to the database!', err);
+  process.exit();
 });
 
-app.use('/', indexRouter); // Use the indexRouter for all routes
+// Define routes
+app.use('/', indexRouter);
 
 // Start the server
 const PORT = process.env.PORT || 8080;
